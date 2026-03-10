@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Config;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -11,31 +12,51 @@ use Illuminate\Support\Facades\Route;
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * The path to the "home" route for your application.
+     * The path to the "index" route for your application.
      *
      * Typically, users are redirected here after authentication.
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/cabinet';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
+
+            /**
+             * Api
+             */
+            Route::middleware(['api'])
+                ->prefix(Config::get('constants.API_PREFIX'))
+                ->as('api.')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            /**
+             * Web
+             * Залогиненный может выходить из ЛК --> middleware(['web'])
+             * Залогиненный всегда будет редиректиться в ЛК --> middleware(['web', 'guest'])
+             */
+            Route::middleware(['web', 'guest'])
                 ->group(base_path('routes/web.php'));
+
+            /**
+             * Cabinet
+             */
+            Route::middleware(['web', 'auth'])
+                ->prefix('cabinet')
+                ->as('cabinet.')
+                ->group(base_path('routes/cabinet.php'));
         });
+
+        Route::pattern('id', '\d+');
     }
 
     /**
@@ -43,9 +64,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', function (Request $request) {
+        RateLimiter::for('api', static function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }

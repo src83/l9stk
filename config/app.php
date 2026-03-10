@@ -17,6 +17,10 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'brand' => env('APP_BRAND', 'Laravel'),
+
+    'front_domain' => env('APP_FRONT_DOMAIN', 'https://example.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

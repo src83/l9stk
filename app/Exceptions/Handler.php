@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -41,10 +47,32 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param Request $request
+     * @param Exception|Throwable $e
+     * @return JsonResponse|Response|\Symfony\Component\HttpFoundation\Response
+     * @throws Throwable
+     * @throws BindingResolutionException
+     */
+    public function render($request, Exception|Throwable $e)
+    {
+        // Fix of "419 Page Expired"
+        if ($e instanceof TokenMismatchException) {
+            return redirect()
+                ->route('showLoginForm')
+                ->with('session_expired', true)
+                ->withInput($request->except('_token'));
+        }
+
+        return parent::render($request, $e);
     }
 }

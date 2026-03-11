@@ -28,9 +28,9 @@
         </span>
         @enderror
 
-        @if ($errors->has('session'))
+        @if(session('session_expired'))
             <div class="alert alert-warning">
-                {{ $errors->first('session') }}
+                Please sign in again ☝️
             </div>
         @endif
 

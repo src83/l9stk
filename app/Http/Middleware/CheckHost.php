@@ -10,10 +10,6 @@ class CheckHost
 {
     /**
      * Handle an incoming request.
-     *
-     * @param Request $request
-     * @param Closure $next
-     * @return mixed
      */
     public function handle(Request $request, Closure $next): mixed
     {
@@ -22,7 +18,7 @@ class CheckHost
 
         $allowedHosts = [$domain, $mobileDomain];
 
-        if (!in_array($request->getHost(), $allowedHosts, true)) {
+        if (! in_array($request->getHost(), $allowedHosts, true)) {
             abort(403);
         }
 

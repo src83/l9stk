@@ -27,8 +27,6 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     *
-     * @var string
      */
     protected string $redirectTo = '/cabinet';
 
@@ -44,7 +42,7 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request): ?RedirectResponse
     {
-        if ( ! User::where('email', $request->email)->first() ) {
+        if (! User::where('email', $request->email)->first()) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([
@@ -52,7 +50,7 @@ class LoginController extends Controller
                 ]);
         }
 
-        if ( ! User::where('email', $request->email)->where('password', bcrypt($request->password))->first() ) {
+        if (! User::where('email', $request->email)->where('password', bcrypt($request->password))->first()) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([

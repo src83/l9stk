@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Cabinet\IndexController;
 use App\Http\Controllers\Cabinet\ExampleController;
+use App\Http\Controllers\Cabinet\IndexController;
 use App\Http\Controllers\Cabinet\ProfileController;
 use App\Http\Controllers\Cabinet\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
  * Cabinet area / Кабинет / ЛК
  * http://l9stk.loc/cabinet
  */
-Route::get('/',       [IndexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 /**

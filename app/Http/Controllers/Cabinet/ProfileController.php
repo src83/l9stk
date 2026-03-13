@@ -16,12 +16,9 @@ class ProfileController extends Controller
 
     /**
      * Show the application dashboard.
-     *
-     * @return Renderable
      */
     public function index(): Renderable
     {
         return view('cabinet.profile');
     }
-
 }

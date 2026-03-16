@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Cabinet;
+namespace App\Http\Controllers\Cabinet\User\Profile;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 
-class SettingsController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,11 +14,8 @@ class SettingsController extends Controller
      */
     public function __construct() {}
 
-    /**
-     * Show the application dashboard.
-     */
     public function index(): Renderable
     {
-        return view('cabinet.settings');
+        return view('cabinet.profile');
     }
 }

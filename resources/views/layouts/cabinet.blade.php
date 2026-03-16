@@ -58,14 +58,14 @@
 
                             <div class="dropdown-menu">
 
-                                @if (Route::has('cabinet.profile'))
-                                    <a class="dropdown-item" href="{{ route('cabinet.profile') }}">
+                                @if (Route::has('cabinet.user.profile.index'))
+                                    <a class="dropdown-item" href="{{ route('cabinet.user.profile.index') }}">
                                         {{ __('Profile') }}
                                     </a>
                                 @endif
 
-                                @if (Route::has('cabinet.settings'))
-                                    <a class="dropdown-item" href="{{ route('cabinet.settings') }}">
+                                @if (Route::has('cabinet.user.settings.password.index'))
+                                    <a class="dropdown-item" href="{{ route('cabinet.user.settings.password.index') }}">
                                         {{ __('Settings') }}
                                     </a>
                                 @endif

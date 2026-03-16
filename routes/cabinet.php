@@ -3,8 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Cabinet\ExampleController;
 use App\Http\Controllers\Cabinet\IndexController;
-use App\Http\Controllers\Cabinet\ProfileController;
-use App\Http\Controllers\Cabinet\SettingsController;
+use App\Http\Controllers\Cabinet\User\Profile\ProfileController;
+use App\Http\Controllers\Cabinet\User\Settings\UserPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -18,9 +18,22 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
  * Настройки юзера
  */
 Route::group([
+    'prefix' => 'user', 'as' => 'user.',
 ], static function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+
+    Route::group([
+        'prefix' => 'profile', 'as' => 'profile.',
+    ], static function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+    });
+
+    Route::group([
+        'prefix' => 'settings', 'as' => 'settings.',
+    ], static function () {
+        Route::get('/password', [UserPasswordController::class, 'index'])->name('password.index');
+        Route::patch('/password', [UserPasswordController::class, 'update'])->name('password.update');
+    });
+
 });
 
 /**

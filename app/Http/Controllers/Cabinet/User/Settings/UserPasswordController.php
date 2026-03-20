@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Cabinet\User\Settings;
 
+use App\Actions\Cabinet\User\LogoutOtherDevicesAction;
+use App\Actions\Cabinet\User\Settings\UpdatePasswordAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cabinet\User\UpdatePasswordRequest;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserPasswordController extends Controller
 {
@@ -17,7 +17,10 @@ class UserPasswordController extends Controller
      *
      * @return void
      */
-    public function __construct() {}
+    public function __construct(
+        public UpdatePasswordAction $updatePasswordAction,
+        public LogoutOtherDevicesAction $logoutOtherDevicesAction
+    ) {}
 
     public function index(): Renderable
     {
@@ -31,17 +34,16 @@ class UserPasswordController extends Controller
     {
         $data = $request->validated();
         $user = $request->user();
+        $logout = $request->boolean('logout_other_sessions');
 
-        $user->update([ // TODO: save with UserService
-            'password' => Hash::make($data['password']),
-        ]);
-
-        if ($request->boolean('logout_other_sessions')) {
-            Auth::logoutOtherDevices($data['password']);
+        if ($logout) {
+            $this->logoutOtherDevicesAction->execute($data['current_password']);
         }
 
-        $message = $request->boolean('logout_other_sessions')
-            ? 'Password updated. Other sessions were logged out.'
+        $this->updatePasswordAction->execute($user, $data['password']);
+
+        $message = $logout
+            ? 'Password updated and other sessions logged out.'
             : 'Password updated.';
 
         return back()->with('success', $message);

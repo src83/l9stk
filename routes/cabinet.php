@@ -43,3 +43,14 @@ Route::group([
 ], static function () {
     Route::get('/example', [ExampleController::class, 'index'])->name('example');
 });
+
+/**
+ * Ajax-маршруты (placeholder for new features)
+ * http://l9stk.loc/cabinet/ajax
+ */
+//Route::group([
+//    'prefix' => 'ajax',
+//    ], static function () {
+//    Route::get('/messages',  [MessageController::class, 'index'])->name('ajax.messages.index');
+//    Route::post('/messages', [MessageController::class, 'create'])->name('ajax.messages.create');
+//});

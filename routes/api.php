@@ -14,17 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
-//});
-
+// });
 
 /**
  * Тестовый метод (placeholder for new features)
  * GET http://urla.loc/api/test/check
  */
-//Route::group([
+// Route::group([
 //    'prefix' => 'test',
-//], static function () {
+// ], static function () {
 //    Route::get('/check', [TestController::class, 'check'])->name('test.check');
-//});
+// });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Example\Providers\ExampleServiceProvider;
 use App\Providers\AppServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\RouteServiceProvider;
@@ -223,6 +224,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,
         RouteServiceProvider::class,
+
+        /*
+         * Moduled Service Providers...
+         */
+        ExampleServiceProvider::class,
 
     ],
 

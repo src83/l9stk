@@ -66,6 +66,11 @@ class Handler extends ExceptionHandler
     {
         // Fix of "419 Page Expired"
         if ($e instanceof TokenMismatchException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'CSRF token mismatch',
+                ], 419);
+            }
             return redirect()
                 ->route('showLoginForm')
                 ->with('session_expired', true)

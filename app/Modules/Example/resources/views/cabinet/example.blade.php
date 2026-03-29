@@ -2,7 +2,7 @@
 
 @push ('custom_css')
 <link href="{{ asset('vendor/customTools/docs/docs.css') }}" rel="stylesheet">
-<link href="{{ asset('css/cabinet/example.css') }}" rel="stylesheet">
+<link href="{{ asset('css/cabinet/example/app.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -20,5 +20,5 @@
 
 @push ('scripts')
     <script src="{{ asset("vendor/customTools/docs/docs.min.js") }}"></script>
-    <script src="{{ asset("js/cabinet/example/index.min.js") }}" defer></script>
+    <script src="{{ asset("js/cabinet/example/app.min.js") }}" defer></script>
 @endpush

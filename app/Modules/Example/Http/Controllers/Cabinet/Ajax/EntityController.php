@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Cabinet\Example\Ajax;
+namespace App\Modules\Example\Http\Controllers\Cabinet\Ajax;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Cabinet\Example\EntityRequest;
+use App\Modules\Example\Http\Requests\Cabinet\StoreEntityRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class EntitiesController extends Controller
+class EntityController extends Controller
 {
     public function __construct() {}
 
@@ -18,7 +18,7 @@ class EntitiesController extends Controller
         ]);
     }
 
-    public function store(EntityRequest $request): JsonResponse
+    public function store(StoreEntityRequest $request): JsonResponse
     {
         $clientId = $request->validated('client_id');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cabinet;
+namespace App\Modules\Example\Http\Controllers\Cabinet;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
@@ -19,6 +19,6 @@ class ExampleController extends Controller
      */
     public function index(): Renderable
     {
-        return view('cabinet.example');
+        return view('example::cabinet.example');
     }
 }

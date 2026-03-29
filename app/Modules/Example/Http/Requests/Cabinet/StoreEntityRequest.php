@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Requests\Cabinet\Example;
+namespace App\Modules\Example\Http\Requests\Cabinet;
 
 use App\Http\Requests\CommonRequest;
 
-final class EntityRequest extends CommonRequest
+final class StoreEntityRequest extends CommonRequest
 {
     public function rules(): array
     {

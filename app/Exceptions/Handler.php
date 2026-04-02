@@ -71,6 +71,7 @@ class Handler extends ExceptionHandler
                     'message' => 'CSRF token mismatch',
                 ], 419);
             }
+
             return redirect()
                 ->route('showLoginForm')
                 ->with('session_expired', true)

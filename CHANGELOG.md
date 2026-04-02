@@ -59,4 +59,4 @@ The format is based on Keep a Changelog.
 
 [v0.1.0]: https://github.com/src83/l9stk/commit/f937c2c900c6407207a29533cf8b458de71905f0
 [v0.2.0]: https://github.com/src83/l9stk/commit/3404dca08fda751c4e4a31eb1a0eb32af0fd0d16
-[v0.3.0]: https://github.com/src83/l9stk/commit/
+[v0.3.0]: https://github.com/src83/l9stk/commit/a520c19dc02fb4a60d5a514e3035843a4df8daaf

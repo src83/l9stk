@@ -24,16 +24,16 @@ class ExampleServiceProvider extends ServiceProvider
         Route::middleware(['web', 'auth'])
             ->prefix('cabinet')
             ->as('cabinet.')
-            ->group(__DIR__ . '/../routes/cabinet.php');
+            ->group(__DIR__.'/../routes/cabinet.php');
     }
 
     protected function loadViews(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'example');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'example');
     }
 
     protected function loadMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }

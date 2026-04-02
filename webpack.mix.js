@@ -35,9 +35,14 @@ mix
 
 // Minification
 mix.js(['resources/js/cabinet/index/index.js'], 'public/js/cabinet/index/index.min.js').version();
-mix.js(['resources/js/cabinet/example/index.js'], 'public/js/cabinet/example/index.min.js').version();
 mix.js(['resources/js/cabinet/profile/index.js'], 'public/js/cabinet/profile/index.min.js').version();
 mix.js(['resources/js/cabinet/settings/index.js'], 'public/js/cabinet/settings/index.min.js').version();
+
+
+// Modules
+mix.css('app/Modules/Example/resources/cabinet/css/app.css', 'public/css/cabinet/example/app.css');
+mix.js(['app/Modules/Example/resources/cabinet/js/app.js'], 'public/js/cabinet/example/app.min.js').version();
+mix.copyDirectory('app/Modules/Example/resources/cabinet/img', 'public/img/cabinet/example').version();
 
 
 // Caching

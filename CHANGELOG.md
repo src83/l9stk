@@ -6,6 +6,25 @@ The format is based on Keep a Changelog.
 
 ## [Unreleased]
 
+## [v0.3.0] - 2026-04-03
+
+**Overview:** Introduces modular monolith architecture with a reference module and project documentation.
+
+### Features
+- Introduce modular architecture (`app/Modules`)
+- Add reference module (`Example`) as a base for new features
+- Add module-level routing, views, migrations, and assets support
+
+### Added
+- Add Example module with Cabinet and Ajax endpoints
+- Add module ServiceProvider integration (routes, views, migrations)
+- Add frontend asset structure for modules
+
+### Docs
+- Add comprehensive README with architecture description and usage guide
+- Document module structure and integration points
+
+
 ## [v0.2.0] - 2026-03-16
 
 **Overview:** Introduces user settings management, improves session handling, and includes code/style maintenance and security updates.
@@ -40,3 +59,4 @@ The format is based on Keep a Changelog.
 
 [v0.1.0]: https://github.com/src83/l9stk/commit/f937c2c900c6407207a29533cf8b458de71905f0
 [v0.2.0]: https://github.com/src83/l9stk/commit/3404dca08fda751c4e4a31eb1a0eb32af0fd0d16
+[v0.3.0]: https://github.com/src83/l9stk/commit/

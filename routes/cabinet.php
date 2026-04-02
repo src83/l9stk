@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Cabinet\Example\Ajax\EntitiesController;
-use App\Http\Controllers\Cabinet\ExampleController;
 use App\Http\Controllers\Cabinet\IndexController;
 use App\Http\Controllers\Cabinet\User\Profile\ProfileController;
 use App\Http\Controllers\Cabinet\User\Settings\UserPasswordController;
@@ -37,21 +35,3 @@ Route::group([
 
 });
 
-/**
- * Example module (placeholder for new features)
- */
-Route::group([
-], static function () {
-    Route::get('/example', [ExampleController::class, 'index'])->name('example');
-});
-
-/**
- * Ajax-маршруты (placeholder for new features)
- * http://l9stk.loc/cabinet/ajax/example
- */
-Route::group([
-    'prefix' => 'ajax/example',
-], static function () {
-    Route::get('/entities', [EntitiesController::class, 'index'])->name('ajax.entities.index');
-    Route::post('/entities', [EntitiesController::class, 'store'])->name('ajax.entities.store');
-});

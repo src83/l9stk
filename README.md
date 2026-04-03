@@ -1,30 +1,42 @@
 ## L9STK — Laravel 9 Starter Kit
 
-- Version: v9.52.21
-- PHP: 8.2.30
+**Русская версия:** [README-RU.md](README-RU.md)
+
+- Project version: v0.3.0
+- Laravel: v9.52.21
+- PHP: 8.2
+
 ---
 
-#### About
+### About
 
 L9STK is a Laravel-based starter kit that implements a **modular monolith** approach.
 
-Each functional unit (e.g., CRUD) is encapsulated as a module.  
+Each functional unit (e.g., CRUD) is encapsulated as a module.
 The goal is to simplify and speed up development of typical business features while keeping the codebase structured and scalable.
 
 ---
 
 ### Why Modular Monolith
 
-- Avoid over-engineering (microservices)
-- Keep codebase structured as it grows
-- Enable feature-level isolation
-- Simplify reuse and refactoring
+- Reduces complexity compared to microservices
+- Maintains a clear structure as the project grows
+- Enables feature-level isolation
+- Simplifies reuse and refactoring
 
 ---
 
-#### Install
+### Important
 
-- `git clone ...`
+- This repository acts as a **core dependency**
+- New features are not added directly
+- Only infrastructure, contracts, and minimal abstractions belong here
+
+---
+
+### Install
+
+- `git clone git@github.com:src83/l9stk.git`
 - copy `.env.example` to `.env` and configure it
 - `composer update`
 - `php artisan migrate`
@@ -36,7 +48,7 @@ The goal is to simplify and speed up development of typical business features wh
 
 ---
 
-### Quick Start (Create Module)
+### Quick Start (create module)
 
 1. Copy the reference module:
    `app/Modules/Example → app/Modules/Post`
@@ -59,11 +71,9 @@ Module is ready.
 
 ---
 
-### Integration Points
+### Integration Points (to connect a module)
 
-To connect a module:
-
-- Register module ServiceProvider in `config/app.php`
+- Register module `ServiceProvider` in `config/app.php`
   - Routes are loaded via `loadRoutes()`
   - Views are loaded via `loadViews()`
   - Migrations are loaded via `loadMigrations()`
@@ -86,7 +96,7 @@ API:
 
 ---
 
-#### Module Structure
+### Module Structure
 
 ```
 app/Modules/Example/
@@ -129,10 +139,6 @@ app/Modules/Example/
       └── web.php
 ```
 
----
-
-### Modules
-
 - All modules are located in: `app/Modules`
 - `app/Modules/Example` — reference module (recommended as a starting point)
 
@@ -142,34 +148,26 @@ You can copy or adapt it to create new features without rethinking architecture.
 
 ### Principles
 
-- Each module is a **self-contained functional unit**
-- Modules are **isolated but not strictly separated**
+- Each module is a self-contained functional unit
+- Modules should be separable and portable
 - New features should preferably be implemented as modules
-- Legacy (non-modular) code can coexist with modules without conflicts
+- Non-modular code in the base framework structure (e.g., legacy) can coexist with modules without conflicts
 
 ---
 
 ### What the module provides
 
 - Structured and scalable architecture
-- Encapsulated routing
+- Encapsulated logic and routing
 - Isolated views and assets
 - ServiceProvider-based integration
 - DI-ready controllers
 
 ---
 
-### Limitations
-
-- No auto-discovery (manual ServiceProvider registration required)
-- No strict module boundaries (shared code still possible)
-- Frontend integration requires manual configuration
-
----
-
 ### Roadmap
 
-- Module auto-discovery
+- Module auto-discovery (actually manual ServiceProvider registration required)
 - Dynamic webpack configuration
 - Provider auto-registration
 
@@ -183,4 +181,4 @@ In production-grade systems, it is recommended to use more abstract naming, such
 - `InternalApi`
 - `UiApi`
 
-to avoid coupling with a specific transport mechanism.
+It will help to avoid coupling with a specific transport mechanism.

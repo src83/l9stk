@@ -38,6 +38,7 @@ The goal is to simplify and speed up development of typical business features wh
 
 - `git clone git@github.com:src83/l9stk.git`
 - copy `.env.example` to `.env` and configure it
+- `composer config --global audit.block-insecure false` 
 - `composer update`
 - `php artisan migrate`
 - `php artisan db:seed`
@@ -182,3 +183,12 @@ In production-grade systems, it is recommended to use more abstract naming, such
 - `UiApi`
 
 It will help to avoid coupling with a specific transport mechanism.
+
+---
+
+### Module context
+
+- To create a migration inside a module, use:
+
+```bash
+php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations

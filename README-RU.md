@@ -38,6 +38,7 @@ L9STK — это стартовый набор на базе Laravel, реали
 
 - `git clone git@github.com:src83/l9stk.git`
 - скопировать `.env.example` в `.env` и настроить его
+- `composer config --global audit.block-insecure false`
 - `composer update`
 - `php artisan migrate`
 - `php artisan db:seed`
@@ -182,3 +183,12 @@ app/Modules/Example/
 - `UiApi`
 
 Это поможет избежать привязки к конкретному способу взаимодействия.
+
+---
+
+### Контекст модуля
+
+- Для создания миграции внутри модуля используйте:
+
+```bash
+php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations

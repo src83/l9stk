@@ -192,3 +192,4 @@ It will help to avoid coupling with a specific transport mechanism.
 
 ```bash
 php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations
+```

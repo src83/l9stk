@@ -192,3 +192,4 @@ app/Modules/Example/
 
 ```bash
 php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations
+```

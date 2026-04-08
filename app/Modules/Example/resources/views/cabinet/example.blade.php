@@ -6,15 +6,19 @@
 @endpush
 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+    <div class="application">
 
-            <div class="starter-template">
-                <h1>Example module</h1>
-                <p class="lead">Placeholder for new features.<br> Now create something great!</p>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+
+                <div class="starter-template">
+                    <h1>Example module</h1>
+                    <p class="lead">Placeholder for new features.<br> Now create something great!</p>
+                </div>
+
             </div>
-
         </div>
+
     </div>
 @endsection
 

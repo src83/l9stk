@@ -75,4 +75,9 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect(route('showLoginForm'));
     }
+
+    protected function redirectTo(): string
+    {
+        return config('cabinet.default_route') ?? $this->redirectTo;
+    }
 }

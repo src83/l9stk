@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Lang;
 
 class LoginController extends Controller
@@ -42,7 +43,9 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request): ?RedirectResponse
     {
-        if (! User::where('email', $request->email)->first()) {
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([
@@ -50,13 +53,15 @@ class LoginController extends Controller
                 ]);
         }
 
-        if (! User::where('email', $request->email)->where('password', bcrypt($request->password))->first()) {
+        if (! Hash::check($request->password, $user->password)) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([
                     'password' => Lang::get('auth.password'),
                 ]);
         }
+
+        return null;
     }
 
     public function logout(Request $request)

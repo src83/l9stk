@@ -28,6 +28,7 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
+     * FYI: legacy fallback, not used when redirectTo() is defined
      */
     protected string $redirectTo = '/cabinet';
 
@@ -45,7 +46,7 @@ class LoginController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->back()
                 ->withInput($request->only($this->username(), 'remember'))
                 ->withErrors([
@@ -81,8 +82,9 @@ class LoginController extends Controller
             : redirect(route('showLoginForm'));
     }
 
+    // 1st route after login
     protected function redirectTo(): string
     {
-        return config('cabinet.default_route') ?? $this->redirectTo;
+        return route(config('cabinet.default_route', 'cabinet.index'));
     }
 }

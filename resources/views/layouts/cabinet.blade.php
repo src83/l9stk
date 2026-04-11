@@ -31,7 +31,7 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ route(config('cabinet.brand_route', 'cabinet.index')) }}">
                 <b>{{ config('app.brand', 'Laravel') }}</b>
             </a>
 
@@ -43,7 +43,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
 
-                    @if (Route::has('cabinet.index') && isMenuVisible('home'))
+                    @if (Route::has('cabinet.index') && isMenuItemVisible('home'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cabinet.index') }}">
                                 {{ __('Home') }}
@@ -51,7 +51,7 @@
                         </li>
                     @endif
 
-                    @if (Route::has('cabinet.example') && isMenuVisible('example'))
+                    @if (Route::has('cabinet.example') && isMenuItemVisible('example'))
                         <li class="nav-item ml-3">
                             <a class="nav-link" href="{{ route('cabinet.example') }}">
                                 {{ __('Example') }}

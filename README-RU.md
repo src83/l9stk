@@ -2,7 +2,7 @@
 
 **English version:** [README.md](README.md)
 
-- Версия проекта: v0.3.0
+- Версия проекта: v0.4.0
 - Laravel: v9.52.21
 - PHP: 8.2
 
@@ -37,6 +37,18 @@ L9STK — это стартовый набор на базе Laravel, реали
 ### Установка
 
 - `git clone git@github.com:src83/l9stk.git`
+- установить права доступа в соответствии с пользователем web-сервера - **в основном требуется для production-среды**:
+
+      1. Определите пользователя (владельца) вашего веб-сервера (PHP-FPM). 
+         Обычно это: `www-data`, `user` или `nginx`. Выполните одну из команд:
+         - ps aux | grep 'php-fpm: pool'
+         - grep "^user" /etc/php/*/fpm/pool.d/*.conf
+         - grep "^group" /etc/php/*/fpm/pool.d/*.conf
+    
+      2. Установите права доступа на все вложенные объекты.
+         - `cd storage`
+         - `sudo chown -R <web-user>:<web-user> ./*`
+
 - скопировать `.env.example` в `.env` и настроить его
 - `composer config --global audit.block-insecure false`
 - `composer update`
@@ -45,6 +57,7 @@ L9STK — это стартовый набор на базе Laravel, реали
 - `php artisan ide-helper:models`
 - `npm install`
 - `npm run dev`
+- в локальной среде в `/etc/hosts` добавить `127.0.0.1 l9stk.loc`
 - открыть в браузере `http://l9stk.loc`
 
 ---
@@ -67,6 +80,11 @@ L9STK — это стартовый набор на базе Laravel, реали
 5. Выполнить:
     - `php artisan migrate`
     - `npm run dev`
+
+6. Для создания миграции внутри модуля используйте:
+```bash
+php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations
+```
 
 Модуль готов.
 
@@ -183,13 +201,3 @@ app/Modules/Example/
 - `UiApi`
 
 Это поможет избежать привязки к конкретному способу взаимодействия.
-
----
-
-### Контекст модуля
-
-- Для создания миграции внутри модуля используйте:
-
-```bash
-php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations
-```

@@ -2,7 +2,7 @@
 
 **Русская версия:** [README-RU.md](README-RU.md)
 
-- Project version: v0.3.0
+- Project version: v0.4.0
 - Laravel: v9.52.21
 - PHP: 8.2
 
@@ -37,6 +37,18 @@ The goal is to simplify and speed up development of typical business features wh
 ### Install
 
 - `git clone git@github.com:src83/l9stk.git`
+- set access rights according to the web server user - **mainly required for production environments**:
+
+      1. Determine your web server user (PHP-FPM owner). 
+         Typically, this is `www-data`, `user` or `nginx`. Run one of the following commands:
+         - ps aux | grep 'php-fpm: pool'
+         - grep "^user" /etc/php/*/fpm/pool.d/*.conf
+         - grep "^group" /etc/php/*/fpm/pool.d/*.conf
+    
+      2. Set permissions on all nested objects.
+         - `cd storage`
+         - `sudo chown -R <web-user>:<web-user> ./*`
+
 - copy `.env.example` to `.env` and configure it
 - `composer config --global audit.block-insecure false` 
 - `composer update`
@@ -45,6 +57,7 @@ The goal is to simplify and speed up development of typical business features wh
 - `php artisan ide-helper:models`
 - `npm install`
 - `npm run dev`
+- in the local environment, add `127.0.0.1 l9stk.loc` to `/etc/hosts`
 - open in browser `http://l9stk.loc`
 
 ---
@@ -67,6 +80,11 @@ The goal is to simplify and speed up development of typical business features wh
 5. Run:
     - `php artisan migrate`
     - `npm run dev`
+
+6. To create a migration inside a module, use:
+```bash
+php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations
+```
 
 Module is ready.
 
@@ -183,13 +201,3 @@ In production-grade systems, it is recommended to use more abstract naming, such
 - `UiApi`
 
 It will help to avoid coupling with a specific transport mechanism.
-
----
-
-### Module context
-
-- To create a migration inside a module, use:
-
-```bash
-php artisan make:migration create_example_table --path=app/Modules/Example/database/migrations
-```

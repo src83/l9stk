@@ -1,0 +1,156 @@
+<?php
+
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Throwable Logging
+    |--------------------------------------------------------------------------
+    | When true, raw exceptions are logged via the 'api_throwable' channel
+    | before being rendered. Filterable per environment via skipped_types.
+    */
+    'log_throwable' => env('API_LOG_THROWABLE', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Rendered Error Logging
+    |--------------------------------------------------------------------------
+    | When true, the final rendered API error response is logged
+    | via the 'api_rendered' channel. Filterable per environment via allowed_codes.
+    */
+    'log_rendered' => env('API_LOG_RENDERED', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Missing Translations
+    |--------------------------------------------------------------------------
+    | When true, missing translation keys are logged via 'api_missing_translations'.
+    | Duplicate misses within a single request are deduplicated automatically.
+    */
+    'log_missing_translations' => env('API_LOG_MISSING_TRANSLATIONS', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Business Warnings
+    |--------------------------------------------------------------------------
+    | When true, business-level warnings are logged via the 'api_business_warnings' channel
+    | using BusinessLogger::warning().
+    */
+    'log_business_warnings' => env('API_LOG_BUSINESS_WARNINGS', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Per-Environment Settings
+    |--------------------------------------------------------------------------
+    | Configure which exceptions to skip for throwable logging and which
+    | HTTP codes to include in rendered logging, per environment.
+    */
+
+    'local' => [
+        'throwable' => [
+            'skipped_types' => [],  // Log everything locally
+        ],
+        'rendered' => [
+            'allowed_codes' => [400, 404, 409, 422, 500],
+        ],
+    ],
+
+    'testing' => [
+        'throwable' => [
+            'skipped_types' => [],
+        ],
+        'rendered' => [
+            'allowed_codes' => [],
+        ],
+    ],
+
+    'staging' => [
+        'throwable' => [
+            'skipped_types' => [
+                AuthenticationException::class,
+                AuthorizationException::class,
+                UnauthorizedException::class,
+                ValidationException::class,
+                ModelNotFoundException::class,
+                MethodNotAllowedException::class,
+                BadRequestException::class,
+                TokenMismatchException::class,
+                UnprocessableEntityHttpException::class,
+            ],
+        ],
+        'rendered' => [
+            'allowed_codes' => [400, 422, 500],
+        ],
+    ],
+
+    'production' => [
+        'throwable' => [
+            'skipped_types' => [
+                AuthenticationException::class,
+                AuthorizationException::class,
+                UnauthorizedException::class,
+                ValidationException::class,
+                ModelNotFoundException::class,
+                MethodNotAllowedException::class,
+                BadRequestException::class,
+                TokenMismatchException::class,
+                HttpException::class,
+            ],
+        ],
+        'rendered' => [
+            'allowed_codes' => [400, 500],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Channels
+    |--------------------------------------------------------------------------
+    | These channels are automatically registered into logging.channels by
+    | ApiResponseServiceProvider. Override by publishing this config and
+    | modifying the array, or by defining the same channel name in config/logging.php.
+    */
+    'channels' => [
+
+        // Technical fact of the error (raw material for: Sentry / dev analysis)
+        'api_throwable' => [
+            'driver' => 'single',
+            'path'   => storage_path('logs/api_throwable.log'),
+            'level'  => env('LOG_LEVEL', 'error'),
+        ],
+
+        // API response, business errors (raw material for: Elastic / ClickHouse)
+        'api_rendered' => [
+            'driver' => 'single',
+            'path'   => storage_path('logs/api_rendered.log'),
+            'level'  => env('LOG_LEVEL', 'error'),
+        ],
+
+        // Logging of missing dictionary keys (when a translation is not found)
+        'api_missing_translations' => [
+            'driver' => 'single',
+            'path'   => storage_path('logs/api_missing_translations.log'),
+            'level'  => 'warning',
+        ],
+
+        // Logging of business anomalies or violations of business expectations
+        'api_business_warnings' => [
+            'driver' => 'single',
+            'path'   => storage_path('logs/api_business_warnings.log'),
+            'level'  => 'warning',
+        ],
+
+    ],
+
+];

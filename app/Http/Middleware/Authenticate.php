@@ -3,22 +3,14 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param  Request  $request
-     */
+    // Get the path where the users should be redirected to when they are not authenticated.
+    // IMPORTANT NOTE: 'login' MUST be a named GET route in your project. Verify the route name
+    // and update it if your app uses a different one (e.g. 'showLoginForm', 'auth.login').
     protected function redirectTo($request): ?string
     {
-        if (! $request->expectsJson()) {
-            // session()->flash('session_expired', true);
-            return route('showLoginForm');
-        }
-
-        return null;
+        return $request->isApi() ? null : route('showLoginForm');
     }
 }

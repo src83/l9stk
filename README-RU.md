@@ -2,7 +2,7 @@
 
 **English version:** [README.md](README.md)
 
-- Версия проекта: v0.4.0
+- Версия проекта: v0.5.0
 - Laravel: v9.52.21
 - PHP: 8.2
 

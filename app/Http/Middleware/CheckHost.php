@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Config;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class CheckHost
 {
@@ -18,7 +18,7 @@ class CheckHost
 
         $allowedHosts = [$domain, $mobileDomain];
 
-        if (! in_array($request->getHost(), $allowedHosts, true)) {
+        if (!in_array($request->getHost(), $allowedHosts, true)) {
             abort(403);
         }
 

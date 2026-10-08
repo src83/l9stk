@@ -2,7 +2,7 @@
 
 **Русская версия:** [README-RU.md](README-RU.md)
 
-- Project version: v0.4.0
+- Project version: v0.5.0
 - Laravel: v9.52.21
 - PHP: 8.2
 

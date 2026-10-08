@@ -26,6 +26,11 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Src83\LaravelApiResponse\Http\Middleware\AppendExecutionTimeMeta;
+use Src83\LaravelApiResponse\Http\Middleware\BindRequestContext;
+use Src83\LaravelApiResponse\Http\Middleware\ForceAcceptJson;
+use Src83\LaravelApiResponse\Http\Middleware\ForceContentType;
+use Src83\LaravelApiResponse\Http\Middleware\WrapApiResponse;
 
 class Kernel extends HttpKernel
 {
@@ -62,10 +67,15 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            ForceAcceptJson::class,
+            BindRequestContext::class,
             CheckHost::class,
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             SubstituteBindings::class,
+            WrapApiResponse::class,
+            AppendExecutionTimeMeta::class,
+            ForceContentType::class,
         ],
     ];
 

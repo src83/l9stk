@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Example\Providers\ExampleServiceProvider;
+use App\Modules\Test\Providers\TestServiceProvider;
 use App\Providers\AppServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\RouteServiceProvider;
@@ -99,7 +100,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +113,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------
@@ -220,6 +221,7 @@ return [
          * Application Service Providers...
          */
         AppServiceProvider::class,
+        App\Providers\BindingServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         EventServiceProvider::class,
@@ -229,6 +231,7 @@ return [
          * Moduled Service Providers...
          */
         ExampleServiceProvider::class,
+        TestServiceProvider::class,
 
     ],
 

@@ -7,9 +7,11 @@
     <testsuites>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
+            <directory suffix="Test.php">./app/Modules/*/tests/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
+            <directory suffix="Test.php">./app/Modules/*/tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
@@ -27,5 +29,8 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="API_IS_MODULE_AVAILABLE" value="true"/>
+        <env name="API_LOG_THROWABLE" value="false"/>
+        <env name="API_LOG_RENDERED" value="false"/>
     </php>
 </phpunit>
